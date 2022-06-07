@@ -1,0 +1,2 @@
+<h1 (click)="addProduct()">Buy all the things!</h1>
+<product *ngFor="let product of getProducts(); let i = index" [product]="product"></product>
