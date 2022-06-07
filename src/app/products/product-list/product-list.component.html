@@ -1,0 +1,3 @@
+<h1 (click)="rotate()" [@rotatedState]='state' style="margin-top: 20px">Buy all the things!</h1>
+<product *ngFor="let product of getProducts(); let i = index" [product]="product"></product>
+<div style="width:100%"><button (click)="addProduct()">Add product</button></div>
