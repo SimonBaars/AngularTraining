@@ -5,13 +5,13 @@ import {Observable} from "rxjs";
 import {ProductComponent} from "../product/product.component";
 import {Product} from "../../models/product";
 import {RemoteProduct} from "../../models/remote_product";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
   animations: [
-    // Each unique animation requires its own trigger. The first argument of the trigger function is the name
     trigger('rotatedState', [
       state('default', style({ transform: 'rotate(0)' })),
       state('rotated', style({ transform: 'rotate(-3600deg)' })),
@@ -20,11 +20,10 @@ import {RemoteProduct} from "../../models/remote_product";
     ])
   ]
 })
-export class ProductListComponent implements OnInit, AfterViewInit {
-
+export class ProductListComponent implements OnInit {
   state: string = 'default';
 
-  constructor(private productService: ProductsService) {
+  constructor(private productService: ProductsService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,7 +31,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   addProduct() {
-    this.productService.add({id: this.getRandomInt(999999).toString(), name: "Ham", price: 13, image: "https://picsum.photos/200?"+this.getRandomInt(999999)});
+    this.productService.add({product_id: this.getRandomInt(999999).toString(), name: "Ham", price: this.getRandomInt(999), image: "https://picsum.photos/200?"+this.getRandomInt(999999)});
   }
 
   getRandomInt(max: number): number {
@@ -45,10 +44,6 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   rotate() {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
-  }
-
-  ngAfterViewInit(): void {
-
   }
 }
 
