@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProductsService} from "../../products.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Observable} from "rxjs";
+import {ProductComponent} from "../product/product.component";
+import {Product} from "../../models/product";
 
 @Component({
   selector: 'product-list',
@@ -16,26 +19,34 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ])
   ]
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, AfterViewInit {
 
   state: string = 'default';
 
   constructor(private productService: ProductsService) {
   }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
+    // this.getProducts().subscribe(c => console.log(c));
+    this.productService.update();
+
   }
 
   addProduct() {
-    this.productService.getProducts().push({name: "Ham", price: 13});
+    this.productService.add({name: "Ham", price: 13});
+    this.productService.update();
   }
 
-  getProducts() {
+  getProducts(): Observable<Product[]> {
     return this.productService.getProducts();
   }
 
   rotate() {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
+  }
+
+  ngAfterViewInit(): void {
+
   }
 }
 

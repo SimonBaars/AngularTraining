@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Product} from "./models/product";
+import {from, Observable} from "rxjs";
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +19,19 @@ export class ProductsService {
     {name: 'Keychain', price: 98},
   ];
 
+  subject = new Subject<Product[]>();
+
   constructor() { }
 
-  getProducts(): Product[] {
-    return this.products;
+  update(): void {
+    this.subject.next(this.products);
+  }
+
+  getProducts(): Observable<Product[]> {
+    return this.subject;
+  }
+
+  add(product: Product) {
+    this.products.push(product);
   }
 }
