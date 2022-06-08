@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Product} from "./models/product";
-import {BehaviorSubject, from, Observable} from "rxjs";
+import {BehaviorSubject, concatMap, from, map, mergeMap, Observable} from "rxjs";
 import { Subject } from 'rxjs';
+import {HttpClient} from "@angular/common/http";
+import {ProductsJson, RemoteProduct} from "./models/remote_product";
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +21,35 @@ export class ProductsService {
     {name: 'Keychain', price: 98},
   ];
 
-  subject = new BehaviorSubject<Product[]>([]);
+  remoteProducts: RemoteProduct[] = [];
 
-  constructor() { }
 
-  update(): void {
-    this.subject.next(this.products);
+  subject = new BehaviorSubject<RemoteProduct[]>([]);
+
+  constructor(private httpClient: HttpClient) {
+
   }
 
-  getProducts(): Observable<Product[]> {
+  fetchProducts(): Observable<RemoteProduct[]> {
+    return this.httpClient
+      .get<ProductsJson>("https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/list")
+      .pipe(map(x => x.products));
+  }
+
+  update(): void {
+    this.subject.next(this.remoteProducts);
+  }
+
+  get(): Observable<RemoteProduct[]> {
     return this.subject;
   }
 
-  add(product: Product) {
+  set(products: RemoteProduct[]): void {
+    this.remoteProducts = products;
+    this.update();
+  }
+
+  add(product: RemoteProduct) {
     this.products.push(product);
   }
 }

@@ -4,6 +4,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Observable} from "rxjs";
 import {ProductComponent} from "../product/product.component";
 import {Product} from "../../models/product";
+import {RemoteProduct} from "../../models/remote_product";
 
 @Component({
   selector: 'product-list',
@@ -27,17 +28,19 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // this.getProducts().subscribe(c => console.log(c));
-    this.productService.update();
-
+    this.productService.fetchProducts().subscribe(res => this.productService.set(res));
   }
 
   addProduct() {
-    this.productService.add({name: "Ham", price: 13});
+    this.productService.add({id: this.getRandomInt(999999).toString(), name: "Ham", price: 13, image: "https://picsum.photos/200?"+this.getRandomInt(999999)});
   }
 
-  getProducts(): Observable<Product[]> {
-    return this.productService.getProducts();
+  getRandomInt(max: number): number {
+    return Math.floor(Math.random() * max);
+  }
+
+  getProducts(): Observable<RemoteProduct[]> {
+    return this.productService.get();
   }
 
   rotate() {

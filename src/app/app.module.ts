@@ -7,6 +7,7 @@ import { MyComponentComponent } from './my-component/my-component.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {PurpleBoxComponent} from "./purple-box/purple-box.component";
 import {ProductsModule} from "./products/products.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {ProductsModule} from "./products/products.module";
     AppRoutingModule,
     BrowserAnimationsModule,
     ProductsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
