@@ -2,9 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProductsService} from "../products.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Observable} from "rxjs";
-import {ProductComponent} from "../product/product.component";
 import {Product} from "../../models/product";
-import {RemoteProduct} from "../../models/remote_product";
 import {Router} from "@angular/router";
 import {FormControl} from "@angular/forms";
 
@@ -41,7 +39,7 @@ export class ProductListComponent implements OnInit {
     return Math.floor(Math.random() * max);
   }
 
-  getProducts(): Observable<RemoteProduct[]> {
+  getProducts(): Observable<Product[]> {
     return this.productService.get();
   }
 
