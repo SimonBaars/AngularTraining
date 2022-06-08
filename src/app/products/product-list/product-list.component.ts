@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {ProductsService} from "../../products.service";
+import {ProductsService} from "../products.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Observable} from "rxjs";
 import {ProductComponent} from "../product/product.component";

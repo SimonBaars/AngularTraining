@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Product} from "./models/product";
+import {Product} from "../models/product";
 import {BehaviorSubject, concatMap, from, map, mergeMap, Observable} from "rxjs";
 import { Subject } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
-import {ProductsJson, RemoteProduct} from "./models/remote_product";
+import {ProductsJson, RemoteProduct} from "../models/remote_product";
 
 @Injectable({
   providedIn: 'root'
