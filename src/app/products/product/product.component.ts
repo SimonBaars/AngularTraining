@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, Directive, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Product} from "../../models/product";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {RemoteProduct} from "../../models/remote_product";
 
 @Component({
   selector: 'product',
@@ -30,7 +31,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 })
 @Input()
 export class ProductComponent implements AfterViewInit {
-  @Input() product: Product;
+  @Input() product: RemoteProduct;
   @ViewChild('productImage') productImage!: ElementRef;
 
   constructor() { }

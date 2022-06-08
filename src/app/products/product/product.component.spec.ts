@@ -18,7 +18,7 @@ describe('ProductComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
-    component.product = {name: "Banana", price: 343};
+    component.product = {id: "8", name: "Banana", price: 343, image: "https://google.com/"};
     fixture.detectChanges();
   });
 

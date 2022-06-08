@@ -50,6 +50,6 @@ export class ProductsService {
   }
 
   add(product: RemoteProduct) {
-    this.products.push(product);
+    this.remoteProducts.push(product);
   }
 }
