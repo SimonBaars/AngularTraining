@@ -6,6 +6,7 @@ import {ProductComponent} from "../product/product.component";
 import {Product} from "../../models/product";
 import {RemoteProduct} from "../../models/remote_product";
 import {Router} from "@angular/router";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'product-list',
@@ -22,12 +23,14 @@ import {Router} from "@angular/router";
 })
 export class ProductListComponent implements OnInit {
   state: string = 'default';
+  nameControl = new FormControl('');
 
   constructor(private productService: ProductsService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.productService.fetchProducts().subscribe(res => this.productService.set(res));
+    this.nameControl.valueChanges.subscribe(value => this.productService.textFilter(value));
   }
 
   addProduct() {

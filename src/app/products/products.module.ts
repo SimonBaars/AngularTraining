@@ -4,6 +4,7 @@ import {ProductListComponent} from "./product-list/product-list.component";
 import {ProductComponent} from "./product/product.component";
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import {RouterModule} from "@angular/router";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {RouterModule} from "@angular/router";
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ProductListComponent

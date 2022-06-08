@@ -11,10 +11,9 @@ import {ProductsJson, RemoteProduct} from "./models/remote_product";
 export class ProductsService {
   remoteProducts: RemoteProduct[] = [];
   subject = new BehaviorSubject<RemoteProduct[]>([]);
+  filter = '';
 
-  constructor(private httpClient: HttpClient) {
-
-  }
+  constructor(private httpClient: HttpClient) {}
 
   fetchProducts(): Observable<RemoteProduct[]> {
     return this.httpClient
@@ -23,7 +22,7 @@ export class ProductsService {
   }
 
   update(): void {
-    this.subject.next(this.remoteProducts);
+    this.subject.next(this.remoteProducts.filter(e => e.name.toLowerCase().includes(this.filter.toLowerCase())));
   }
 
   get(): Observable<RemoteProduct[]> {
@@ -37,5 +36,11 @@ export class ProductsService {
 
   add(product: RemoteProduct) {
     this.remoteProducts.push(product);
+    this.update();
+  }
+
+  textFilter(filter: string) {
+    this.filter = filter;
+    this.update();
   }
 }
