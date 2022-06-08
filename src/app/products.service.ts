@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Product} from "./models/product";
-import {from, Observable} from "rxjs";
+import {BehaviorSubject, from, Observable} from "rxjs";
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class ProductsService {
     {name: 'Keychain', price: 98},
   ];
 
-  subject = new Subject<Product[]>();
+  subject = new BehaviorSubject<Product[]>([]);
 
   constructor() { }
 

@@ -26,7 +26,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   constructor(private productService: ProductsService) {
   }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     // this.getProducts().subscribe(c => console.log(c));
     this.productService.update();
 
@@ -34,7 +34,6 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
   addProduct() {
     this.productService.add({name: "Ham", price: 13});
-    this.productService.update();
   }
 
   getProducts(): Observable<Product[]> {
