@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Product} from "../../models/product";
 import {Router} from "@angular/router";
 import {FormControl} from "@angular/forms";
+import {RandomProductService} from "../random-product.service";
 
 @Component({
   selector: 'product-list',
@@ -23,20 +24,12 @@ export class ProductListComponent implements OnInit {
   state: string = 'default';
   nameControl = new FormControl('');
 
-  constructor(private productService: ProductsService, private router: Router) {
+  constructor(private productService: ProductsService, private randomProductService: RandomProductService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.productService.fetchProducts().subscribe(res => this.productService.set(res));
     this.nameControl.valueChanges.subscribe(value => this.productService.textFilter(value));
-  }
-
-  addProduct() {
-    this.productService.add({product_id: this.getRandomInt(999999).toString(), name: "Ham", price: this.getRandomInt(999), image: "https://picsum.photos/200?"+this.getRandomInt(999999)});
-  }
-
-  getRandomInt(max: number): number {
-    return Math.floor(Math.random() * max);
   }
 
   getProducts(): Observable<Product[]> {
@@ -45,6 +38,10 @@ export class ProductListComponent implements OnInit {
 
   rotate() {
     this.state = (this.state === 'default' ? 'rotated' : 'default');
+  }
+
+  addProduct() {
+    this.productService.add(this.randomProductService.get());
   }
 }
 
