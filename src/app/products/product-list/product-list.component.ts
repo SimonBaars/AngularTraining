@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ProductsService} from "../products.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {Product} from "../../models/product";
 import {Router} from "@angular/router";
 import {FormControl} from "@angular/forms";
@@ -34,6 +34,10 @@ export class ProductListComponent implements OnInit {
 
   getProducts(): Observable<Product[]> {
     return this.productService.get();
+  }
+
+  getProductNames(): Observable<string[]> {
+    return this.getProducts().pipe(map(ps => ps.map(p => p.name)));
   }
 
   rotate() {

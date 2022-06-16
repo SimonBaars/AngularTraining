@@ -5,6 +5,8 @@ import {ProductComponent} from "./product/product.component";
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
   ],
   exports: [
     ProductListComponent

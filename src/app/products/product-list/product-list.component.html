@@ -1,4 +1,20 @@
 <h1 (click)="rotate()" [@rotatedState]='state' style="margin-top: 20px">Buy all the things!</h1>
-<div style="width:100%"><input type="text" style="width:200px" placeholder="Search all the things!" [formControl]="nameControl" ></div>
+<div style="width:100%">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Search products</mat-label>
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Number"
+           matInput
+           [formControl]="nameControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of getProductNames() | async" [value]="option">
+        {{option}}
+    </mat-option>
+</mat-autocomplete>
+    </mat-form-field>
+<!--    <input type="text" style="width:200px" placeholder="Search all the things!" [formControl]="nameControl" >-->
+</div>
 <product *ngFor="let product of getProducts() | async" [product]="product"></product>
 <div style="width:100%"><button (click)="addProduct()">Add product</button></div>

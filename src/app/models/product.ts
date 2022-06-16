@@ -16,3 +16,7 @@ export interface ProductDetails {
   image: string
   description: string
 }
+
+export interface CartProducts {
+  [key: string]: number
+}

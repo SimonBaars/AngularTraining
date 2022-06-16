@@ -1,3 +1,4 @@
 <h1>Buy all the {{productDetails.name}}!</h1>
 <img src="{{productDetails.image}}" alt="{{productDetails.name}}">
 <p>{{productDetails.description}}</p>
+<button (click)="addToCart(productDetails.product_id)">Buy me!</button>
